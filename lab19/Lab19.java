@@ -6,10 +6,15 @@ public class Lab19 {
             File sourceFile = new File("test.dat");
             File distFile = new File("test-out.dat");
 
-            new BufferedOutputStream(new FileOutputStream(distFile)) {{
-                write(new BufferedInputStream(new FileInputStream(sourceFile)).readAllBytes());
-                close();
-            }};
+            FileOutputStream fileOutputStream = new FileOutputStream(distFile);
+            FileInputStream fileInputStream = new FileInputStream(sourceFile);
+
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+
+            bufferedOutputStream.write(bufferedInputStream.readAllBytes());
+            bufferedOutputStream.close();
+            bufferedInputStream.close();
         }
         catch (FileNotFoundException e){
             File sourceFile = new File("test.dat");
